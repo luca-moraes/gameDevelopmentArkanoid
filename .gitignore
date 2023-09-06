@@ -2,7 +2,9 @@
 Temp/
 Library/
 Logs/
-build/ # my personal build folder
+
+# my personal build folder:
+build/ 
 
 # Ignore Visual Studio files:
 ExportedObj/
