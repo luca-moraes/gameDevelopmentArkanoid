@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class PlayerControls : MonoBehaviour
 {
-    public KeyCode moveUp = KeyCode.W;
-    public KeyCode moveDown = KeyCode.S;
+    public KeyCode moveLeft = KeyCode.A;
+    public KeyCode moveRight = KeyCode.D;
     public float speed = 10.0f;
     public float boundY = 2.25f;
     private Rigidbody2D rb2d;
@@ -20,24 +20,24 @@ public class PlayerControls : MonoBehaviour
     void Update()
     {
      	var vel = rb2d.velocity;
-  	if (Input.GetKey(moveUp)) {
-   		vel.y = speed;
+  	if (Input.GetKey(moveLeft)) {
+   		vel.x = -speed;
   	}
- 	else if (Input.GetKey(moveDown)) {
-   		vel.y = -speed;
+ 	else if (Input.GetKey(moveRight)) {
+   		vel.x = +speed;
   	}
 	else {
-  		vel.y = 0;
+  		vel.x = 0;
  	}
 
 	rb2d.velocity = vel;
 	var pos = transform.position;
 
-	if (pos.y > boundY) {
-		pos.y = boundY;
+	if (pos.x > boundY) {
+		pos.x = boundY;
 	}
-	else if (pos.y < -boundY) {
-		pos.y = -boundY;
+	else if (pos.x < -boundY) {
+		pos.x = -boundY;
 	}
 
 	transform.position = pos;

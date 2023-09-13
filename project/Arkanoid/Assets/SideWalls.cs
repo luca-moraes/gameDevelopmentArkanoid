@@ -6,7 +6,7 @@ public AudioSource somPonto;
 
 	void OnTriggerEnter2D(Collider2D hitInfo)
 {
-somPonto = GetComponent<AudioSource>();
+
 GameManager gameManager = GetComponent<GameManager>(); // Encontre a instância do GameManager
 
 if (hitInfo.name == "Ball" && gameManager != null)
