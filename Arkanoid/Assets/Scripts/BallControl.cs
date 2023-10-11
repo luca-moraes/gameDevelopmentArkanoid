@@ -24,7 +24,7 @@ public class BallControl : MonoBehaviour
         	rb2d.velocity = vel;
     	}
 
-	    audioPlayer.Play();
+	    // audioPlayer.Play();
     }
 
      void ResetBall(){
