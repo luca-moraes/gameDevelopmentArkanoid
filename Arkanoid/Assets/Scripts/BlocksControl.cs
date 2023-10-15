@@ -8,16 +8,18 @@ public class BlocksControl : MonoBehaviour {
     {
         GameManager gameManager = FindObjectOfType<GameManager>();
 
-        if (hitInfo.name == "Ball" && gameManager != null)
+        if ((hitInfo.name == "Ball" || hitInfo.name == "PowerUpBall") && gameManager != null)
         {
             numHits++;
 
             if(gameObject.CompareTag("palisade") && numHits == 2){
-                gameManager.Score(1);
+                var pos = Camera.main.WorldToScreenPoint(gameObject.transform.position);
+                gameManager.Score(1, pos.x, Screen.height - pos.y);
                 Destroy(gameObject);
 
             }else if(gameObject.CompareTag("roman") && numHits == 4){
-                gameManager.Score(2);
+                var pos = Camera.main.WorldToScreenPoint(gameObject.transform.position);
+                gameManager.Score(2, pos.x, Screen.height - pos.y);
                 Destroy(gameObject);
             }
         }

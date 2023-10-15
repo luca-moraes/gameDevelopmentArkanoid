@@ -19,11 +19,16 @@ public class BallControl : MonoBehaviour
     void OnCollisionEnter2D(Collision2D coll) {
     	if(coll.collider.CompareTag("Player"))
 		{
-        	Vector2 vel;
-        	vel.x = rb2d.velocity.x*1.02f;
-        	vel.y = ((rb2d.velocity.y / 2) + (coll.collider.attachedRigidbody.velocity.y / 3))*1.05f;
-        	rb2d.velocity = vel;
-			rb2d.AddForce(new Vector2(0.1f*vel.x, 0.1f*vel.y));
+			Vector2 vel;
+			vel.y = rb2d.velocity.y*-1.0f;
+
+        	// Vector2 vel;
+
+        	// vel.x = rb2d.velocity.x*1.1f;
+        	// vel.y = ((rb2d.velocity.y / 2) + (coll.collider.attachedRigidbody.velocity.y / 3))*1.1f;
+
+        	// rb2d.velocity = vel.y;
+			// rb2d.AddForce(new Vector2(1.1f*vel.x, 1.1f*vel.y));
     	}
 
 	    // audioPlayer.Play();
