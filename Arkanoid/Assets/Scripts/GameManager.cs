@@ -11,6 +11,13 @@ public class GameManager : MonoBehaviour
 {
 	// FinalScore finalScore;
 	// private int faseAtual = 0;
+	private AudioSource ponto1;
+	private AudioSource ponto2;
+	private AudioSource clickButton;
+	private AudioSource faseComplete;
+	private AudioSource faseFail;
+	private AudioSource perde1;
+	private AudioSource perde2;
 
 	private bool desistencia = false;
 	private bool bonusActive = false;
@@ -139,6 +146,7 @@ public class GameManager : MonoBehaviour
 
 	private void RestartBalls()
     {
+		//perde 1 ponto
         theBall.SendMessage("RestartGame", 0.5f, SendMessageOptions.RequireReceiver);
     }
 
@@ -151,6 +159,7 @@ public class GameManager : MonoBehaviour
 
 		PontoObject ponto = new PontoObject(Screen.width / 2 - 105, 5, "-2", false);
 		pontos.Enqueue(ponto);
+		//perde 2 pontos
 	}
 
 	void OnGUI () {
@@ -162,6 +171,8 @@ public class GameManager : MonoBehaviour
 
 			if (GUI.Button(new Rect(Screen.width / 2 - 60, Screen.height/2, 120, 53), "SATUS"))
 			{
+				// clickButton.Play();
+				// Invoke("changeScene", 2);
 				changeScene();
 			}
 		}
@@ -332,7 +343,7 @@ public class GameManager : MonoBehaviour
 		else if(SceneManager.GetActiveScene().name == "Scene3")
         {
 			// savePontuacao(1);
-            SceneManager.LoadScene("Scene4");
+            SceneManager.LoadScene("Scene11");
         }
 		else if(SceneManager.GetActiveScene().name == "Scene4")
 		{
@@ -446,7 +457,16 @@ public class GameManager : MonoBehaviour
     {
         theBall = GameObject.FindGameObjectWithTag("TagBall");
 		theBonus = GameObject.FindGameObjectWithTag("TagBonus");
-		// AudioSource[] audios = GetComponents<AudioSource>();
+
+		AudioSource[] audios = GetComponents<AudioSource>();
+
+		ponto1 = audios[0];
+		ponto2 = audios[1];
+		clickButton = audios[2];
+		faseComplete = audios[3];
+		faseFail = audios[4];
+		perde1 = audios[5];
+		perde2 = audios [6];
 
 		setDecStyle();
 		setEndStyle();
