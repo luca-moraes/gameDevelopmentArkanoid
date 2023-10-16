@@ -1,4 +1,3 @@
-using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,18 +9,21 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-	Pontuacao[] pontuacoes;
-	private int faseAtual = 0;
+	// FinalScore finalScore;
+	// private int faseAtual = 0;
 
+	private bool desistencia = false;
 	private bool bonusActive = false;
 	private bool powerUpActive = false;
 
 	public GUISkin layout;
 	private GUIStyle guiStyleDec = new GUIStyle();
 	private GUIStyle guiStyleEnd = new GUIStyle();
+	private GUIStyle guiStyleDst = new GUIStyle();
 	private GUIStyle guiStyleInc = new GUIStyle();
 	private GUIStyle guiStylePts = new GUIStyle();
 	private GUIStyle guiStyleTtr = new GUIStyle();
+	private GUIStyle guiStyleSma = new GUIStyle();
 
 	private Queue<PontoObject> pontos = new Queue<PontoObject>();
 
@@ -52,6 +54,17 @@ public class GameManager : MonoBehaviour
       	debugTex.Apply();
 
 		guiStyleEnd.normal.background = debugTex;
+	}
+
+	private void setDstStyle(){
+		guiStyleDst.fontSize = 22;
+		guiStyleDst.normal.textColor = Color.red;
+
+		Texture2D debugTex = new Texture2D(1,1);
+	  	debugTex.SetPixel(0,0, Color.black);
+	  	debugTex.Apply();
+
+		guiStyleDst.normal.background = debugTex;
 	}
 
 	private void setIncStyle(){
@@ -86,11 +99,22 @@ public class GameManager : MonoBehaviour
 
 		guiStyleTtr.normal.background = debugTex;
 	}
+
+	private void setSmaStyle(){
+		guiStyleSma.fontSize = 12;
+		guiStyleSma.normal.textColor = Color.red;		
+
+		Texture2D debugTex = new Texture2D(1,1);
+	  	debugTex.SetPixel(0,0, new Color(0.0f, 0.0f, 0.0f, 0.3f));
+	  	debugTex.Apply();
+
+		guiStyleSma.normal.background = debugTex;
+	}
 	
 	public void Score (int type, float x, float y) {
 	    if (type == 1)
 	    {
-			pontuacoes[faseAtual].palisade += 1;
+			FinalScore.pontuacoes[faseAtual()].palisade += 1;
 
 			PontoObject ponto = new PontoObject(x, y, "+1", true);
 			pontos.Enqueue(ponto);
@@ -98,7 +122,7 @@ public class GameManager : MonoBehaviour
 	    }
 		else if (type == 2)
 		{
-	        pontuacoes[faseAtual].roman += 1;
+	        FinalScore.pontuacoes[faseAtual()].roman += 1;
 
 			PontoObject ponto = new PontoObject(x, y, "+2", true);
 			pontos.Enqueue(ponto);
@@ -110,7 +134,7 @@ public class GameManager : MonoBehaviour
 	}
 
 	void showPlacar(){
-		GUI.Label(new Rect(Screen.width / 2 - 60 - 12, 5, 130, 22), "PUNCTA: " + pontuacoes[faseAtual].total() , guiStylePts);
+		GUI.Label(new Rect(Screen.width / 2 - 60 - 12, 5, 130, 22), "PUNCTA: " + FinalScore.pontuacoes[faseAtual()].total() , guiStylePts);
 	}
 
 	private void RestartBalls()
@@ -119,11 +143,11 @@ public class GameManager : MonoBehaviour
     }
 
 	private void decPontos(){
-		pontuacoes[faseAtual].clicks += 1;
+		FinalScore.pontuacoes[faseAtual()].clicks += 1;
 	}
 
 	public void retBall(){
-		pontuacoes[faseAtual].quedas += 1;
+		FinalScore.pontuacoes[faseAtual()].quedas += 1;
 
 		PontoObject ponto = new PontoObject(Screen.width / 2 - 105, 5, "-2", false);
 		pontos.Enqueue(ponto);
@@ -141,12 +165,51 @@ public class GameManager : MonoBehaviour
 				changeScene();
 			}
 		}
+		else if(SceneManager.GetActiveScene().name == "Scene11")
+		{
+			GUI.Label(new Rect(Screen.width / 2 - 250, 30, 120, 28), "FINIS LUDI", guiStyleEnd);
+
+			int basePosY = 100;
+			int numFase = 1;
+			int somaFinal = 0;
+
+			// Pontuacao[] pontuacaoFinal = FinalScore.getPontuacoes();
+
+			foreach(Pontuacao pontuacao in FinalScore.pontuacoes){
+				GUI.Label(new Rect(Screen.width / 2 - 250, basePosY, 140, 26), "TEMPUS " + numFase + " SUMMA: " + pontuacao.total(), guiStyleSma);
+
+				GUI.Label(new Rect(Screen.width / 2 - 230, basePosY + 30, 450, 26),
+				 "TESSELLIS -> " + pontuacao.palisade + " | " + "VALOREM -> " + pontuacao.palisadePts() 
+				 + " | <---> | CAUDICES -> " + pontuacao.roman + " | " + "VALOREM -> " + pontuacao.romanPts(),
+				 guiStyleSma
+				);
+
+				GUI.Label(new Rect(Screen.width / 2 - 230, basePosY + 60, 450, 26),
+				 "CADIT -> " + pontuacao.quedas + " | " + "VALOREM -> " + pontuacao.quedasPts()
+				 + " | <---> | REPONERES -> " + pontuacao.clicks + " | " + "VALOREM -> " + pontuacao.clicksPts(),
+				 guiStyleSma
+				);
+				
+				basePosY += 90;
+				numFase += 1;
+				somaFinal += pontuacao.total();
+			}
+
+			GUI.Label(new Rect(Screen.width / 2 - 60, basePosY, 140, 26), "SUMMA FINALIS: " + somaFinal, guiStyleSma);
+
+
+			if (GUI.Button(new Rect(Screen.width / 2 - 60, Screen.height - 90, 120, 53), "SILEO"))
+			{
+				RestartGameManager();
+			}
+		}
 		else
 		{
 			showPlacar();
 		
-			if (GUI.Button(new Rect(Screen.width / 2 - 60, Screen.height/2 + 80, 120, 53), "PERDERE"))
+			if (GUI.Button(new Rect(Screen.width / 2 + 190, Screen.height - 40, 90, 30), "PERDERE"))
 			{
+				desistencia = true;
 				DestroyAll();
 			}
 
@@ -163,8 +226,12 @@ public class GameManager : MonoBehaviour
 			if (palisades.Length == 0 && romanes.Length == 0)
 			{
 				RestartBalls();
-
-				GUI.Box(new Rect(Screen.width / 2 - 150, Screen.height/2, 270, 22), "VICISTI PROVOCATIONEM!", guiStyleEnd);
+				
+				if(desistencia){
+					GUI.Box(new Rect(Screen.width / 2 - 150, Screen.height/2, 310, 22), "DESISTISTI PROVOCATIONEM!", guiStyleDst);
+				}else{
+					GUI.Box(new Rect(Screen.width / 2 - 150, Screen.height/2, 270, 22), "VICISTI PROVOCATIONEM!", guiStyleEnd);
+				}
 
 				// #if UNITY_EDITOR
 				// 	Handles.Label(new Vector3(Screen.width/2-60, Screen.height/2, 0.0f), "Fase finalizada!", guiStyleEnd);
@@ -174,7 +241,7 @@ public class GameManager : MonoBehaviour
 				Invoke("changeScene", 3);
 			}
 			
-			if(pontuacoes[faseAtual].total() > 15 && !bonusActive)
+			if(FinalScore.pontuacoes[faseAtual()].total() > 15 && !bonusActive)
 			{
 				bonusActive = true;
 				theBonus.SendMessage("dropBonus", 0.5f, SendMessageOptions.RequireReceiver);
@@ -197,52 +264,128 @@ public class GameManager : MonoBehaviour
 		}
 	}
 
-	private void changeScene(){
-		if(faseAtual < 8){
-			faseAtual += 1;
-			bonusActive = false;
-			powerUpActive = false;
+	// private void savePontuacao(int faseNum){
+	// 	FinalScore.addPontuacao(pontuacaoFaseAtual, faseNum);
+	// }
+
+	private int faseAtual(){
+		if(SceneManager.GetActiveScene().name == "Scene2")
+        {
+			return 0;
+        }
+		else if(SceneManager.GetActiveScene().name == "Scene3")
+        {
+			return 1;
+        }
+		else if(SceneManager.GetActiveScene().name == "Scene4")
+		{
+			return 2;
 		}
+		else if(SceneManager.GetActiveScene().name == "Scene5")
+		{
+			return 3;
+		}
+		else if(SceneManager.GetActiveScene().name == "Scene6")
+		{
+			return 4;
+		}
+		else if(SceneManager.GetActiveScene().name == "Scene7")
+		{
+			return 5;
+		}
+		else if(SceneManager.GetActiveScene().name == "Scene8")
+		{
+			return 6;
+		}
+		else if(SceneManager.GetActiveScene().name == "Scene9")
+		{
+			return 7;
+		}
+		else if(SceneManager.GetActiveScene().name == "Scene10")
+		{
+			return 8;
+		}
+		else
+		{
+			return -1;
+		}
+	}
+
+	private void changeScene(){
+		// if(faseAtual < 8){
+		// 	faseAtual += 1;
+		// 	FinalScore.addPontuacao(pontuacaoFaseAtual, faseAtual);
+		// }
 
 		if (SceneManager.GetActiveScene().name == "Scene1")
         {
-			faseAtual = 0;
+			// faseAtual = 0;
+			// FinalScore.initFinalScore();
             SceneManager.LoadScene("Scene2");
         }
         else if(SceneManager.GetActiveScene().name == "Scene2")
         {
+			// faseAtual = 1;
+			// savePontuacao(0);
             SceneManager.LoadScene("Scene3");
         } 
 		else if(SceneManager.GetActiveScene().name == "Scene3")
         {
+			// savePontuacao(1);
             SceneManager.LoadScene("Scene4");
         }
 		else if(SceneManager.GetActiveScene().name == "Scene4")
 		{
+			// savePontuacao(2);
 			SceneManager.LoadScene("Scene5");
 		} 
 		else if(SceneManager.GetActiveScene().name == "Scene5")
 		{
+			// savePontuacao(3);
 			SceneManager.LoadScene("Scene6");
 		}
 		else if(SceneManager.GetActiveScene().name == "Scene6")
 		{
+			// savePontuacao(4);
 			SceneManager.LoadScene("Scene7");
 		}
 		else if(SceneManager.GetActiveScene().name == "Scene7")
 		{
+			// savePontuacao(5);
 			SceneManager.LoadScene("Scene8");
 		}
 		else if(SceneManager.GetActiveScene().name == "Scene8")
 		{
+			// savePontuacao(6);
 			SceneManager.LoadScene("Scene9");
 		}
 		else if(SceneManager.GetActiveScene().name == "Scene9")
 		{
+			// savePontuacao(7);
 			SceneManager.LoadScene("Scene10");
 		}
+		else if(SceneManager.GetActiveScene().name == "Scene10")
+		{
+			// savePontuacao(8);
+			SceneManager.LoadScene("Scene11");
+		}
 
+		bonusActive = false;
+		powerUpActive = false;
+		desistencia = false;
+		// pontuacaoFaseAtual = new Pontuacao();
 		readVecs();
+	}
+
+	private void RestartGameManager(){
+		// faseAtual = 0;
+		bonusActive = false;
+		powerUpActive = false;
+		// pontuacaoFaseAtual = new Pontuacao[9].Select(x => new Pontuacao()).ToArray();
+		// pontuacaoFaseAtual = new Pontuacao();
+
+		SceneManager.LoadScene("Scene1");
+		FinalScore.resetPontuacoes();
 	}
 
 	private void DestroyAll(){
@@ -279,20 +422,42 @@ public class GameManager : MonoBehaviour
 		romanes = GameObject.FindGameObjectsWithTag("roman");
 	}
 
+	// void Awake()
+    // {
+    //     //Check if instance already exists
+    //     if (finalScore == null){
+            
+    //         //if not, set instance to this
+    //         finalScore = GameObject.FindGameObjectWithTag("Score");
+	// 	}
+    //     //If instance already exists and it's not this:
+    //     // else if (finalScore != this){
+
+    //     //     //Then destroy this. This enforces our singleton pattern, 
+	// 	// 	// meaning there can only ever be one instance of a GameManager.
+    //     //     Destroy(gameObject);    
+	// 	// }
+    //     //Sets this to not be destroyed when reloading scene / Switching scenes
+    //     DontDestroyOnLoad(finalScore); // VERY IMPORTANT
+    // }
+
     // Start is called before the first frame update
     void Start()
     {
         theBall = GameObject.FindGameObjectWithTag("TagBall");
 		theBonus = GameObject.FindGameObjectWithTag("TagBonus");
 		// AudioSource[] audios = GetComponents<AudioSource>();
+
 		setDecStyle();
 		setEndStyle();
 		setIncStyle();
 		setPtsStyle();
 		setTtrStyle();
+		setSmaStyle();
+		setDstStyle();
 
-		pontuacoes = new Pontuacao[9].Select(x => new Pontuacao()).ToArray();
-		// Pontuacao[] pontuacoes = InitializeArray<Pontuacao>(10);
+		// pontuacaoFaseAtual = new Pontuacao[9].Select(x => new Pontuacao()).ToArray();
+		// Pontuacao[] pontuacaoFaseAtual = Pontuacao.InitializeArray<Pontuacao>(10);
 
 		readVecs();
 		searchPowerUps();

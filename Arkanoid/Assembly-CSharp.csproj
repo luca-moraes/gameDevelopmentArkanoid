@@ -50,6 +50,7 @@
      <Compile Include="Assets/Scripts/SideWalls.cs" />
      <Compile Include="Assets/Scripts/Pontuacao.cs" />
      <Compile Include="Assets/Scripts/GameManager.cs" />
+     <Compile Include="Assets/Scripts/FinalScore.cs" />
      <Compile Include="Assets/Scripts/PowerUpSword.cs" />
      <Compile Include="Assets/Scripts/PlayerControls.cs" />
      <Compile Include="Assets/Scripts/BlocksControl.cs" />

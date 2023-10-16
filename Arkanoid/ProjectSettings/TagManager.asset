@@ -10,6 +10,7 @@ TagManager:
   - TagBonus
   - TagPowerUpBall
   - TagPowerUpSword
+  - Score
   layers:
   - Default
   - TransparentFX
