@@ -198,8 +198,15 @@ public class GameManager : MonoBehaviour
 	}
 
 	private void changeScene(){
+		if(faseAtual < 8){
+			faseAtual += 1;
+			bonusActive = false;
+			powerUpActive = false;
+		}
+
 		if (SceneManager.GetActiveScene().name == "Scene1")
         {
+			faseAtual = 0;
             SceneManager.LoadScene("Scene2");
         }
         else if(SceneManager.GetActiveScene().name == "Scene2")
@@ -235,8 +242,6 @@ public class GameManager : MonoBehaviour
 			SceneManager.LoadScene("Scene10");
 		}
 
-		faseAtual += 1;
-		bonusActive = false;
 		readVecs();
 	}
 
