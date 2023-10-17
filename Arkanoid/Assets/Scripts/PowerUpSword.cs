@@ -7,7 +7,7 @@ public class PowerUpSword : MonoBehaviour
     private Rigidbody2D rb2d;
     public float speed = 10.0f;
     public float partialSpeed = 0.05f;
-    public float boundX = 2.3f;
+    public float boundX = 2.5f;
     private bool activeMoving = false;
     private bool subindo = false;
     public AudioClip launch;
@@ -51,6 +51,7 @@ public class PowerUpSword : MonoBehaviour
     {
         rb2d = GetComponent<Rigidbody2D>();       
         audioSource = GetComponent<AudioSource>(); 
+        boundX = 2.5f;
     }
 
     // Update is called once per frame

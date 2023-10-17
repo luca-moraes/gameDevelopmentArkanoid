@@ -7,12 +7,13 @@ public class PlayerControls : MonoBehaviour
   public KeyCode moveUp = KeyCode.A;
   public KeyCode moveDown = KeyCode.S;
   public float speed = 10.0f;
-  public float boundX = 2.25f;
+  public float boundX = 2.5f;
   private Rigidbody2D rb2d;
 
   void Start()
   {
-    rb2d = GetComponent<Rigidbody2D>();    
+    rb2d = GetComponent<Rigidbody2D>();   
+	boundX = 2.5f; 
   }
 
   void Update()
