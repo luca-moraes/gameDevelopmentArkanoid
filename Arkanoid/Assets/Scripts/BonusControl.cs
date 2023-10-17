@@ -5,6 +5,9 @@ using UnityEngine;
 public class BonusControl : MonoBehaviour
 {
     private Rigidbody2D rb2d;
+    public AudioClip launch;
+    public AudioClip hits;
+    private AudioSource audioSource;
     
     // private AudioSource audioPlayer;
 
@@ -19,9 +22,12 @@ public class BonusControl : MonoBehaviour
     }
 
     public void OnCollisionEnter2D(Collision2D coll) {
+        audioSource.PlayOneShot(hits);
+
     	if(coll.collider.CompareTag("Player"))
 		{
             // audioPlayer.Play();
+            audioSource.PlayOneShot(launch);
             Destroy(gameObject);
     	}
         if(coll.collider.CompareTag("TagBall"))
@@ -50,6 +56,7 @@ public class BonusControl : MonoBehaviour
 		pos.y = 5.2f;
 
     	transform.position = pos;
+        audioSource.PlayOneShot(launch);
     }
 
     public void RestartBonus(){
@@ -65,9 +72,8 @@ public class BonusControl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // audioPlayer = GetComponent<AudioSource>() ;
+        audioSource = GetComponent<AudioSource>();
         rb2d = GetComponent<Rigidbody2D>();
-        
     }
 
     // Update is called once per frame

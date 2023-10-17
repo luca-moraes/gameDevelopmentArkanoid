@@ -5,8 +5,13 @@ using UnityEngine;
 public class PowerUpBall : MonoBehaviour
 {
     private Rigidbody2D rb2d;
+    public AudioClip launch;
+    public AudioClip hits;
+    private AudioSource audioSource;
 
     private void OnCollisionEnter2D(Collision2D coll) {
+        audioSource.PlayOneShot(hits);
+
     	if(coll.collider.CompareTag("Player"))
 		{
             Vector2 vel;
@@ -41,6 +46,7 @@ public class PowerUpBall : MonoBehaviour
 		pos.y = -3.5f;
 
     	transform.position = pos;
+        audioSource.PlayOneShot(launch);
     }
 
     private void ResetPowerUp(){
@@ -63,6 +69,7 @@ public class PowerUpBall : MonoBehaviour
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame

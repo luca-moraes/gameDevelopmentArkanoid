@@ -10,6 +10,9 @@ public class PowerUpSword : MonoBehaviour
     public float boundX = 2.3f;
     private bool activeMoving = false;
     private bool subindo = false;
+    public AudioClip launch;
+    public AudioClip hits;
+    private AudioSource audioSource;
 
     private void GoPowerUp(){
     	activeMoving = true;
@@ -35,6 +38,7 @@ public class PowerUpSword : MonoBehaviour
 		pos.y = -5f;
 
     	transform.position = pos;
+        audioSource.PlayOneShot(launch);
     }
 
     public void turnOn(){
@@ -45,7 +49,8 @@ public class PowerUpSword : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        rb2d = GetComponent<Rigidbody2D>();        
+        rb2d = GetComponent<Rigidbody2D>();       
+        audioSource = GetComponent<AudioSource>(); 
     }
 
     // Update is called once per frame
@@ -57,6 +62,7 @@ public class PowerUpSword : MonoBehaviour
                 if(transform.position.x < boundX){
                     transform.position = new Vector2(transform.position.x + partialSpeed, transform.position.y);
                 } else {
+                    audioSource.PlayOneShot(hits);
                     subindo = false;
                 }
             } 
@@ -65,6 +71,7 @@ public class PowerUpSword : MonoBehaviour
                 if(transform.position.x > -boundX){
                     transform.position = new Vector2(transform.position.x - partialSpeed, transform.position.y);
                  } else {
+                    audioSource.PlayOneShot(hits);
                     subindo = true;
                 }
             }                                                                   

@@ -11,13 +11,15 @@ public class GameManager : MonoBehaviour
 {
 	// FinalScore finalScore;
 	// private int faseAtual = 0;
-	private AudioSource ponto1;
-	private AudioSource ponto2;
-	private AudioSource clickButton;
-	private AudioSource faseComplete;
-	private AudioSource faseFail;
-	private AudioSource perde1;
-	private AudioSource perde2;
+	public AudioClip ponto1;
+	public AudioClip ponto2;
+	public AudioClip clickButton;
+	public AudioClip faseComplete;
+	public AudioClip faseFail;
+	public AudioClip perde1;
+	public AudioClip perde2;
+
+	private AudioSource audioSource;
 
 	private bool desistencia = false;
 	private bool bonusActive = false;
@@ -125,7 +127,7 @@ public class GameManager : MonoBehaviour
 
 			PontoObject ponto = new PontoObject(x, y, "+1", true);
 			pontos.Enqueue(ponto);
-
+			audioSource.PlayOneShot(ponto1);
 	    }
 		else if (type == 2)
 		{
@@ -133,6 +135,7 @@ public class GameManager : MonoBehaviour
 
 			PontoObject ponto = new PontoObject(x, y, "+2", true);
 			pontos.Enqueue(ponto);
+			audioSource.PlayOneShot(ponto2);
 	    }
 	}
 
@@ -147,6 +150,7 @@ public class GameManager : MonoBehaviour
 	private void RestartBalls()
     {
 		//perde 1 ponto
+		audioSource.PlayOneShot(perde1);
         theBall.SendMessage("RestartGame", 0.5f, SendMessageOptions.RequireReceiver);
     }
 
@@ -159,6 +163,7 @@ public class GameManager : MonoBehaviour
 
 		PontoObject ponto = new PontoObject(Screen.width / 2 - 105, 5, "-2", false);
 		pontos.Enqueue(ponto);
+		audioSource.PlayOneShot(perde2);
 		//perde 2 pontos
 	}
 
@@ -171,9 +176,9 @@ public class GameManager : MonoBehaviour
 
 			if (GUI.Button(new Rect(Screen.width / 2 - 60, Screen.height/2, 120, 53), "SATUS"))
 			{
-				// clickButton.Play();
-				// Invoke("changeScene", 2);
-				changeScene();
+				audioSource.PlayOneShot(clickButton);
+				Invoke("changeScene", 1);
+				// changeScene();
 			}
 		}
 		else if(SceneManager.GetActiveScene().name == "Scene11")
@@ -211,7 +216,9 @@ public class GameManager : MonoBehaviour
 
 			if (GUI.Button(new Rect(Screen.width / 2 - 60, Screen.height - 90, 120, 53), "SILEO"))
 			{
-				RestartGameManager();
+				// RestartGameManager();
+				audioSource.PlayOneShot(clickButton);
+				Invoke("RestartGameManager", 1);
 			}
 		}
 		else
@@ -239,8 +246,10 @@ public class GameManager : MonoBehaviour
 				RestartBalls();
 				
 				if(desistencia){
+					audioSource.PlayOneShot(faseFail);
 					GUI.Box(new Rect(Screen.width / 2 - 150, Screen.height/2, 310, 22), "DESISTISTI PROVOCATIONEM!", guiStyleDst);
 				}else{
+					audioSource.PlayOneShot(faseComplete);
 					GUI.Box(new Rect(Screen.width / 2 - 150, Screen.height/2, 270, 22), "VICISTI PROVOCATIONEM!", guiStyleEnd);
 				}
 
@@ -343,7 +352,7 @@ public class GameManager : MonoBehaviour
 		else if(SceneManager.GetActiveScene().name == "Scene3")
         {
 			// savePontuacao(1);
-            SceneManager.LoadScene("Scene11");
+            SceneManager.LoadScene("Scene4");
         }
 		else if(SceneManager.GetActiveScene().name == "Scene4")
 		{
@@ -458,15 +467,7 @@ public class GameManager : MonoBehaviour
         theBall = GameObject.FindGameObjectWithTag("TagBall");
 		theBonus = GameObject.FindGameObjectWithTag("TagBonus");
 
-		AudioSource[] audios = GetComponents<AudioSource>();
-
-		ponto1 = audios[0];
-		ponto2 = audios[1];
-		clickButton = audios[2];
-		faseComplete = audios[3];
-		faseFail = audios[4];
-		perde1 = audios[5];
-		perde2 = audios [6];
+		audioSource = GetComponent<AudioSource>();
 
 		setDecStyle();
 		setEndStyle();

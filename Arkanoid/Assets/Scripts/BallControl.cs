@@ -5,7 +5,11 @@ using UnityEngine;
 public class BallControl : MonoBehaviour
 {
     private Rigidbody2D rb2d;
-    private AudioSource audioPlayer;
+    private AudioSource audioSource;
+	public AudioClip palisadeHit;
+    public AudioClip romanHit;
+	public AudioClip playerHit;
+	public AudioClip wallHit;
 
     void GoBall(){
     	float rand = Random.Range(0, 2);
@@ -19,6 +23,7 @@ public class BallControl : MonoBehaviour
     void OnCollisionEnter2D(Collision2D coll) {
     	if(coll.collider.CompareTag("Player"))
 		{
+			audioSource.PlayOneShot(playerHit);
 			Vector2 vel;
 			vel.y = rb2d.velocity.y*-1.0f;
 
@@ -30,6 +35,17 @@ public class BallControl : MonoBehaviour
         	// rb2d.velocity = vel.y;
 			// rb2d.AddForce(new Vector2(1.1f*vel.x, 1.1f*vel.y));
     	}
+		else if(coll.collider.CompareTag("palisade"))
+		{
+			audioSource.PlayOneShot(palisadeHit);
+		}
+		else if(coll.collider.CompareTag("roman"))
+		{
+			audioSource.PlayOneShot(romanHit);
+		}
+		else{
+			audioSource.PlayOneShot(wallHit);
+		}
 
 	    // audioPlayer.Play();
     }
@@ -52,7 +68,7 @@ public class BallControl : MonoBehaviour
 
     void Start()
     {
-	    audioPlayer = GetComponent<AudioSource>() ;
+	    audioSource = GetComponent<AudioSource>() ;
         rb2d = GetComponent<Rigidbody2D>();
     	Invoke("GoBall", 1);
     }
