@@ -1176,7 +1176,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 9b1b8c9317828cb668b5f5a0f1dd69c5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7bf538ba671905cceab872303015f223, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1641,7 +1641,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 9632e1c4acb4e02feafed860af30f3a0, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9aaeec46707ea325aae0065d1afbe6c0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -2051,7 +2051,7 @@ GameObject:
   - component: {fileID: 445173018}
   m_Layer: 0
   m_Name: palisade (3)
-  m_TagString: roman
+  m_TagString: palisade
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2214,7 +2214,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 2d1cd1e584b1349d38e23cbd9f6e37fd, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d1b9a2471508bdb5f84d024056f4fce7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -2820,7 +2820,7 @@ GameObject:
   - component: {fileID: 590794263}
   m_Layer: 0
   m_Name: palisade
-  m_TagString: roman
+  m_TagString: palisade
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2983,7 +2983,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 2d1cd1e584b1349d38e23cbd9f6e37fd, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d1b9a2471508bdb5f84d024056f4fce7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -3793,7 +3793,7 @@ GameObject:
   - component: {fileID: 1188011590}
   m_Layer: 0
   m_Name: palisade (2)
-  m_TagString: roman
+  m_TagString: palisade
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3956,7 +3956,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 2d1cd1e584b1349d38e23cbd9f6e37fd, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d1b9a2471508bdb5f84d024056f4fce7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -4171,7 +4171,7 @@ GameObject:
   - component: {fileID: 1284846957}
   m_Layer: 0
   m_Name: palisade (1)
-  m_TagString: roman
+  m_TagString: palisade
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4334,7 +4334,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 2d1cd1e584b1349d38e23cbd9f6e37fd, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d1b9a2471508bdb5f84d024056f4fce7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -4360,7 +4360,7 @@ GameObject:
   - component: {fileID: 1289840824}
   m_Layer: 0
   m_Name: palisade (1)
-  m_TagString: palisade
+  m_TagString: roman
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4523,7 +4523,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: d1b9a2471508bdb5f84d024056f4fce7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2d1cd1e584b1349d38e23cbd9f6e37fd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -5411,7 +5411,7 @@ GameObject:
   - component: {fileID: 1567334953}
   m_Layer: 0
   m_Name: palisade (2)
-  m_TagString: palisade
+  m_TagString: roman
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5574,7 +5574,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: d1b9a2471508bdb5f84d024056f4fce7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2d1cd1e584b1349d38e23cbd9f6e37fd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -5600,7 +5600,7 @@ GameObject:
   - component: {fileID: 1583197123}
   m_Layer: 0
   m_Name: palisade
-  m_TagString: roman
+  m_TagString: palisade
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5763,7 +5763,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 2d1cd1e584b1349d38e23cbd9f6e37fd, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d1b9a2471508bdb5f84d024056f4fce7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -5923,7 +5923,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 87cf1f0dd34c7e8909107aa957072bf4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b473edf8eba91b821992ea0f6d17a1fe, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -5964,7 +5964,7 @@ GameObject:
   - component: {fileID: 1668804876}
   m_Layer: 0
   m_Name: palisade (2)
-  m_TagString: palisade
+  m_TagString: roman
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6127,7 +6127,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: d1b9a2471508bdb5f84d024056f4fce7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2d1cd1e584b1349d38e23cbd9f6e37fd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
